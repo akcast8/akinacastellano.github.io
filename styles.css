@@ -138,3 +138,13 @@ a.button:hover {
         font-size: 0.95em;
     }
 }
+
+.profile-image {
+    width: 200px;        /* Adjust size */
+    height: auto;
+    border-radius: 50%;  /* Makes it circular */
+    display: block;
+    margin: 20px auto;   /* Center the image */
+    border: 2px solid #0073e6;
+  }
+  
