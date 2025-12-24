@@ -140,11 +140,30 @@ a.button:hover {
 }
 
 .profile-image {
-    width: 400px;        /* Adjust size */
+    width: 300px;        /* Adjust size */
     height: auto;
     border-radius: 50%;  /* Makes it circular */
     display: block;
     margin: 20px auto;   /* Center the image */
-    border: 2px solid #FF7DE9;
-  }
+    border: 2px solid #FF9CED;
+}
+
+.contact-icons {
+    display: flex;
+    gap: 20px; /* space between icons */
+    justify-content: center; /* center horizontally */
+    margin-top: 20px;
+}
+  
+.contact-icons a i {
+    font-size: 24px; /* adjust icon size */
+    color: #FF9CED;
+    transition: color 0.3s;
+}
+  
+.contact-icons a:hover i {
+    color: #FF7DE9;
+}
+  
+  
   
