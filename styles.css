@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     line-height: 1.6;
     color: #222;
     scroll-behavior: smooth;
@@ -140,11 +140,11 @@ a.button:hover {
 }
 
 .profile-image {
-    width: 200px;        /* Adjust size */
+    width: 400px;        /* Adjust size */
     height: auto;
     border-radius: 50%;  /* Makes it circular */
     display: block;
     margin: 20px auto;   /* Center the image */
-    border: 2px solid #0073e6;
+    border: 2px solid #FF7DE9;
   }
   
