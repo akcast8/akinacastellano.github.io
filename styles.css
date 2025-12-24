@@ -1,9 +1,140 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #222;
+    scroll-behavior: smooth;
+    background-color: #f5f5f5;
+}
+
+a {
+    color: #0073e6;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+header {
+    background-color: #222;
+    color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+header h3 {
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+header p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.1em;
+}
+
+nav {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #fff;
+    padding: 15px 25px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #555;
 }
 
 section {
-  padding: 40px;
+    padding: 60px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+section h1 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 1.8em;
+    margin: 20px 0 10px;
+}
+
+section h3 {
+    font-size: 1.3em;
+    margin: 15px 0 10px;
+}
+
+section p, section li {
+    font-size: 1.05em;
+    margin-bottom: 10px;
+}
+
+.project {
+    background-color: #fff;
+    padding: 25px 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+a.button {
+    display: inline-block;
+    padding: 12px 22px;
+    background-color: #0073e6;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+a.button:hover {
+    background-color: #005bb5;
+}
+
+#contact p {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2.2em;
+    }
+    header h3 {
+        font-size: 1.1em;
+    }
+    section {
+        padding: 40px 15px;
+    }
+    nav a {
+        padding: 12px 18px;
+        font-size: 0.95em;
+    }
 }

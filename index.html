@@ -1,140 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Akina Castellano | CS Portfolio</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Akina Castellano</h1>
-        <h3>Computer Science Graduate | Software & AI</h3>
-        <p>
-            Hi my name is Akina. I’ve received my Bachelor’s in Computer Science, and I’m passionate 
-            about software engineering, AI agents, and game development. I build apps, intelligent systems, 
-            and interactive experiences.
-        </p>
-    </header>
 
-    <section id="projects">
-        <h1>Projects</h1>
-            <h2>Physical Diagnosis App (Melanoma Awareness & Screening Tool)</h3>
-            <p> Developed a mobile application in collaboration with an Emory University physician 
-                to promote melanoma awareness and support early skin cancer detection through image-based 
-                screening and educational resources. The app combines machine learning-powered analysis 
-                with guided clinical assessment to help users make informed health decisions.
-            </p>
+  <header>
+    <h1>Akina Castellano</h1>
+    <h3>Computer Science Graduate | Software & AI</h3>
+    <p>
+      Hi, my name is Akina. I’ve received my Bachelor’s in Computer Science and I’m passionate 
+      about software engineering, AI agents, and game development. I build apps, intelligent systems, 
+      and interactive experiences.
+    </p>
+  </header>
 
-            <h3>Tech Stack:</h3>
-            <p>Swift, Xcode, Apple Create ML, Firebase, iOS SDK, Jira</p>
+  <nav>
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <a href="#resume">Resume</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-            <h3>Key Features:</h3>
-            <p>- Machine learning-based skin image scanning that evaluates potential melanoma severity and 
-                provides personalized recommendations</p>
-            <p>- Image upload and scan history tracking to monitor skin changes over time</p>
-            <p>- ABCDE melanoma assessment checklist integrated with image analysis</p>
-            <p>- Educational resource hub with medically reviewed melanoma information</p>
-            <p>- “Find Medical Professionals Nearby” feature to support follow-up care</p>
-            <p>- Secure, user-specific data storage using Firebase</p>
+  <section id="projects">
+    <h1>Projects</h1>
 
-            <h3>What I Did:</h3>
-            <p>- Designed and implemented core iOS features in Swift, including the ABCDE Checklist View 
-                and scan history tracking system</p>
-            <p>- Integrated Apple Create ML models to support image-based melanoma screening</p>
-            <p>- Build Firebase-backed user data storage for scan records and image comparisons</p>
-            <p>- Researched and incorporated trusted clinical content (e.g., Mayo Clinic guidelines) into the educational section</p>
-            <p>- Collaborated cross-functionally with a physician and team members using Jira for task management</p>
-            <p>- Helped present the project at Expo, where it earned 3rd Place for innovation and impact</p>
-        
-            <h2>Unity Video Game</h2>
-            <p> Developed a Unity-based 3D third person survival game emphasizing real-time character 
-                control, intelligent enemy behavior, and immersive environmental interaction. The project 
-                showcases core game development principles through polished mechanics, AI systems, and 
-                player-driven exploration.
-            </p>
+    <div class="project">
+      <h2>Physical Diagnosis App</h2>
+      <p>A mobile app for melanoma awareness and early detection.</p>
+      <a class="button" href="projects/physical-diagnosis.html">View Project</a>
+    </div>
 
-            <h3>Tech Stack:</h3>
-            <p>Unity, C#, NavMesh, Animator (Root Motion), Trello, Version Control (Git)</p>
+    <div class="project">
+      <h2>Unity 3D Survival Game</h2>
+      <p>A Unity-based 3D third-person survival game with AI pathfinding.</p>
+      <a class="button" href="projects/unity-game.html">View Project</a>
+    </div>
 
-            <h3>Key Features:</h3>
-            <p>- Fully animated third-person player controller using root motion</p>
-            <p>- NavMesh-based enemy AI with dynamic pathfinding and chase behavior</p>
-            <p>- Puzzle-solving mechanics integrated into level progression</p>
-            <p>- Interactive UI menus for gameplay flow and player feedback</p>
-            <p>- Immersive level design supporting exploration and survival gameplay</p>
+    <div class="project">
+      <h2>Mobile 2D RPG Game</h2>
+      <p>A 2D RPG Android game featuring character selection and progressive levels.</p>
+      <a class="button" href="projects/mobile-rpg.html">View Project</a>
+    </div>
 
-            <h3>What I Did:</h3>
-            <p>- Implemented gameplay mechanics and player controls using C# in Unity</p>
-            <p>- Assisted with level design and environmental layout to support puzzles and navigation</p>
-            <p>- Developed and tuned enemy AI using Unity NavMesh for real-time pursuit behavior</p>
-            <p>- Build interactive UI elements and menus to enhance player experience</p>
-            <p>- Collaborated with team members using Trello and version control to manage tasks and iterations</p>
+    <div class="project">
+      <h2>Banking Database System App</h2>
+      <p>A desktop banking app with GUI and secure PostgreSQL database integration.</p>
+      <a class="button" href="projects/banking-app.html">View Project</a>
+    </div>
+  </section>
 
-            <h2>Mobile Video Game App</h2>
-            <p> Designed and developed a 2D RPG mobile game in Android Studio that features character selection, 
-                progressively challenging levels, and dynamic enemy encounters. The project demonstrates core 
-                mobile game development concepts including game state management, difficulty scaling, and UI 
-                integration.
-            </p>
+  <section id="about">
+    <h1>About Me</h1>
+    <p>
+      I’m a Computer Science graduate with experience in app development, AI problem-solving, 
+      and game design. I enjoy building systems that combine logic and creativity, from intelligent 
+      agents to Unity games.
+    </p>
+  </section>
 
-            <h3>Tech Stack:</h3>
-            <p>Java, Android Studio, Android SDK, Java</p>
+  <section id="resume">
+    <h1>Resume</h1>
+    <a class="button" href="Akina_Castellano_Resume.pdf" download>Download Resume</a>
+  </section>
 
-            <h3>Key Features:</h3>
-            <p>- Character sprite selection system with distinct visual styles</p>
-            <p>- Multi-level progression with increasing difficulty and varied texture tiles</p>
-            <p>- Enemy combat mechanics featuring differing health levels and skill behaviors</p>
-            <p>- Game state and difficulty progression management for balanced gameplay</p>
-            <p>- End-of-game scoreboard displaying player name, date, time, and final score</p>
+  <section id="contact">
+    <h1>Contact</h1>
+    <p>Email: <a href="mailto:akinacast@gmail.com">akinacast@gmail.com</a></p>
+    <p>Phone: (630) 335-0475</p>
+    <p>LinkedIn: <a href="https://www.linkedin.com/in/akina-castellano" target="_blank">www.linkedin.com/in/akina-castellano</a></p>
+  </section>
 
-            <h3>What I Did:</h3>
-            <p>- Designed and implemented core gameplay systems in Java, including combat logic and level progression</p>
-            <p>- Developed character selection and sprite management systems</p>
-            <p>- Implemented dynamic enemy behaviors with scalable difficulty</p>
-            <p>- Build a scoreboard system to record and display player performance data</p>
-            <p>- Managed project planning and team coordination using Jira</p>
-
-            <h2>Banking Database System App</h2>
-            <p> Designed and developed a desktop banking application featuring a graphical user interface 
-                and secure database integration to manage financial transactions and user accounts. The 
-                system emphasizes role-based access control, data integrity, and efficient financial 
-                operations.
-            </p>
-            
-            <h3>Tech Stack:</h3>
-            <p>Python, Tkinter, PostgreSQL, SQL, Database Design</p>
-
-            <h3>Key Features:</h3>
-            <p>- Graphical user interface built with Tkinter for intuitive banking operations</p>
-            <p>- Secure POstgreSQL-backed database for structured account and transaction management</p>
-            <p>- Core banking functionality including deposits, withdrawals, transfers, and account creation/deletion</p>
-            <p>- Role-based access control with distinct permissions for Managers, Tellers, and Customers</p>
-            <p>- Structured database schema supporting data consistency and operational efficiency</p>
-
-            <h3>What I Did:</h3>
-            <p>- Designed and implemented the Tkinter-based GUI for all user roles</p>
-            <p>- Build and optimized SQL queries for transaction processing and account management</p>
-            <p>- Implemented role-based functionality to enforce access permissions and security</p>
-            <p>- Integrated PostgreSQL with the application for persistent data storage</p>
-            <p>- Designed the underlying database schema to support scalable financial operations</p>
-    </section>
-
-    <section id="about">
-        <h1>About</h1>
-            <p>I’m a Computer Science graduate with experience in app development, AI problem-solving, 
-                and game design. I enjoy building systems that combine logic and creativity from 
-                intelligent agents to Unity games.</p>
-    </section>
-
-    <section id="resume">
-        <h1>Resume</h1>
-        <a href="Akina_Castellano_Resume.pdf" download>Download Resume</a>
-    </section>
-
-    <section id="contact">
-        <h1>Contact</h1>
-            <p>Email: <a href="mailto:akinacast@gmail.com">akinacast@gmail.com</a></p>
-            <p>Phone: (630) 335-0475</p>
-            <p>LinkedIn: <a href="https://www.linkedin.com/in/akina-castellano" target="_blank">www.linkedin.com/in/akina-castellano</a></p>
-    </section>
 </body>
 </html>
