@@ -148,6 +148,13 @@ a.button:hover {
     border: 2px solid #FF9CED;
 }
 
+.brochure-image {
+    width: 600px;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+}
+
 .contact-icons {
     display: flex;
     gap: 20px; /* space between icons */
