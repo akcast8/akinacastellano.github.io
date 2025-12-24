@@ -106,7 +106,7 @@ section p, section li {
 a.button {
     display: inline-block;
     padding: 12px 22px;
-    background-color: #0073e6;
+    background-color: #FF9CED;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -115,7 +115,7 @@ a.button {
 }
 
 a.button:hover {
-    background-color: #005bb5;
+    background-color: #FF7DE9;
 }
 
 #contact p {
