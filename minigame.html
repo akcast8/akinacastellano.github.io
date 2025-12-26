@@ -1,130 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Mini RPG | Akina Castellano</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <title>Mini RPG Dungeon | Akina Castellano</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #111;
       color: #fff;
       text-align: center;
-      padding: 40px;
+      padding: 20px;
     }
 
-    .game-box {
-      max-width: 500px;
-      margin: auto;
+    #game-container {
+      display: grid;
+      grid-template-columns: repeat(8, 50px);
+      grid-template-rows: repeat(8, 50px);
+      gap: 2px;
+      margin: 20px auto;
+      width: fit-content;
+    }
+
+    .cell {
+      width: 50px;
+      height: 50px;
       background: #1c1c1c;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    }
-
-    .stats {
+      border-radius: 4px;
       display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      transition: background 0.2s;
     }
 
-    button {
-      padding: 12px 20px;
-      margin: 8px;
-      border: none;
-      border-radius: 6px;
-      background: #FF9CED;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-      transition: transform 0.2s ease;
+    .player {
+      color: #FF9CED;
     }
 
-    button:hover {
-      transform: translateY(-2px);
+    .enemy {
+      color: #FFD700;
+    }
+
+    .goal {
+      color: #00FFAA;
     }
 
     .log {
       margin-top: 20px;
-      min-height: 60px;
-      font-size: 0.95rem;
+      min-height: 40px;
+      font-size: 1rem;
       opacity: 0.9;
+    }
+
+    a.button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #FF9CED;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
     }
   </style>
 </head>
 <body>
 
-  <h1>⚔️ The Dungeon</h1>
-  <p>A tiny RPG built just for fun</p>
+  <h1>Mini RPG Dungeon</h1>
+  <p>Use arrow keys to move your character (🤺). Reach the goal (💎) and avoid enemies (👾).</p>
 
-  <div class="game-box">
-    <div class="stats">
-      <div>You: <span id="playerHP">100</span> HP</div>
-      <div>Enemy: <span id="enemyHP">80</span> HP</div>
-    </div>
-
-    <button onclick="attack()">Attack</button>
-    <button onclick="defend()">Defend</button>
-    <button onclick="heal()">Heal</button>
-
-    <div class="log" id="log">An enemy appears!</div>
-  </div>
-
-  <br />
+  <div id="game-container"></div>
+  <div class="log" id="log">Move with arrow keys.</div>
   <a class="button" href="index.html">Back to Home</a>
 
   <script>
-    let playerHP = 100;
-    let enemyHP = 80;
-    let defending = false;
+    const rows = 8;
+    const cols = 8;
+    const container = document.getElementById("game-container");
+    const log = document.getElementById("log");
 
-    function updateUI(message) {
-      document.getElementById("playerHP").textContent = playerHP;
-      document.getElementById("enemyHP").textContent = enemyHP;
-      document.getElementById("log").textContent = message;
-    }
+    let playerPos = {x: 0, y: 0};
+    const enemyPos = {x: 5, y: 5};
+    const goalPos = {x: 7, y: 7};
 
-    function enemyTurn() {
-      if (enemyHP <= 0) return;
-
-      let damage = Math.floor(Math.random() * 15) + 5;
-      if (defending) {
-        damage = Math.floor(damage / 2);
-        defending = false;
+    const grid = [];
+    for(let y=0; y<rows; y++){
+      const row = [];
+      for(let x=0; x<cols; x++){
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+        container.appendChild(cell);
+        row.push(cell);
       }
+      grid.push(row);
+    }
 
-      playerHP -= damage;
-      updateUI(`The enemy attacks dealing ${damage} damage!`);
+    function render() {
+      for(let y=0; y<rows; y++){
+        for(let x=0; x<cols; x++){
+          grid[y][x].textContent = "";
+          grid[y][x].className = "cell";
+        }
+      }
+      grid[playerPos.y][playerPos.x].textContent = "🤺";
+      grid[playerPos.y][playerPos.x].classList.add("player");
 
-      if (playerHP <= 0) {
-        updateUI("You died.");
+      grid[enemyPos.y][enemyPos.x].textContent = "👾";
+      grid[enemyPos.y][enemyPos.x].classList.add("enemy");
+
+      grid[goalPos.y][goalPos.x].textContent = "💎";
+      grid[goalPos.y][goalPos.x].classList.add("goal");
+    }
+
+    function movePlayer(dx, dy){
+      const newX = playerPos.x + dx;
+      const newY = playerPos.y + dy;
+      if(newX < 0 || newX >= cols || newY < 0 || newY >= rows) return;
+      playerPos.x = newX;
+      playerPos.y = newY;
+
+      if(playerPos.x === enemyPos.x && playerPos.y === enemyPos.y){
+        log.textContent = "You died. Game Over.";
+        document.removeEventListener("keydown", handleKey);
+      } else if(playerPos.x === goalPos.x && playerPos.y === goalPos.y){
+        log.textContent = "You reached the treasure! Victory!";
+        document.removeEventListener("keydown", handleKey);
+      } else {
+        log.textContent = "Keep moving...";
+      }
+      render();
+    }
+
+    function handleKey(e){
+      switch(e.key){
+        case "ArrowUp": movePlayer(0, -1); break;
+        case "ArrowDown": movePlayer(0, 1); break;
+        case "ArrowLeft": movePlayer(-1, 0); break;
+        case "ArrowRight": movePlayer(1, 0); break;
       }
     }
 
-    function attack() {
-      let damage = Math.floor(Math.random() * 20) + 8;
-      enemyHP -= damage;
-      updateUI(`You attack dealing ${damage} damage!`);
-
-      if (enemyHP <= 0) {
-        updateUI("You win!");
-        return;
-      }
-      setTimeout(enemyTurn, 700);
-    }
-
-    function defend() {
-      defending = true;
-      updateUI("You defend.");
-      setTimeout(enemyTurn, 700);
-    }
-
-    function heal() {
-      let healAmount = Math.floor(Math.random() * 15) + 10;
-      playerHP = Math.min(playerHP + healAmount, 100);
-      updateUI(`You healed ${healAmount} HP.`);
-      setTimeout(enemyTurn, 700);
-    }
+    document.addEventListener("keydown", handleKey);
+    render();
   </script>
 
 </body>
