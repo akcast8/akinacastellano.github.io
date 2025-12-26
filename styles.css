@@ -107,7 +107,6 @@ section p, section li {
     box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 } */
 
-/* ===== Projects ===== */
 .project {
     padding: 20px;
     margin: 20px 0;
@@ -165,37 +164,26 @@ a.button:hover {
     }
 }
 
-/* .profile-image {
+.profile-image {
     width: 300px;
     height: auto;
     border-radius: 50%;
-    display: block;
+    /* display: block; */
     margin: 20px auto;
     border: 2px solid #FF9CED;
-} */
-
-.profile-image {
-    width: 180px;
-    border-radius: 50%;
-    margin-bottom: 20px;
     opacity: 0;
     transform: scale(0.9);
     animation: popIn 0.8s ease forwards;
     animation-delay: 0.4s;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
+}
   
-  .profile-image:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-  }
-  
-  @keyframes popIn {
+@keyframes popIn {
     to {
       opacity: 1;
       transform: scale(1);
     }
-  }
+}
 
 .brochure-image {
     width: 600px;
@@ -288,26 +276,3 @@ a.button:hover {
     opacity: 1;
     transform: translateY(0);
 }
-  
-nav a {
-    margin: 0 15px;
-    position: relative;
-    text-decoration: none;
-    color: #222;
-}
-  
-nav a::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: -4px;
-    left: 0;
-    background-color: #222;
-    transition: width 0.3s ease;
-}
-  
-nav a:hover::after {
-    width: 100%;
-}
-  
