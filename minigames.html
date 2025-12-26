@@ -2,54 +2,74 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Mini RPG Dungeon | Akina Castellano</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FNAF Mini Game | Akina Castellano</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #111;
+      background-color: #000;
       color: #fff;
       text-align: center;
       padding: 20px;
     }
 
-    #game-container {
-      display: grid;
-      grid-template-columns: repeat(8, 50px);
-      grid-template-rows: repeat(8, 50px);
-      gap: 2px;
+    h1 { color: #FF9CED; }
+
+    #game-room {
+      width: 400px;
+      height: 300px;
+      background: #111;
       margin: 20px auto;
-      width: fit-content;
+      border: 2px solid #FF9CED;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
     }
 
-    .cell {
+    .door, .animatronic, .light {
+      position: absolute;
+    }
+
+    .door {
+      width: 50px;
+      height: 100%;
+      top: 0;
+      background-color: #222;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #leftDoor { left: 0; }
+    #rightDoor { right: 0; }
+
+    .door.closed { background-color: #FF9CED; }
+
+    .animatronic {
+      width: 80px;
+      height: 120px;
+      bottom: 0;
+      left: 160px;
+      background-color: #555;
+      display: none;
+      border-radius: 10px;
+    }
+
+    .light {
       width: 50px;
       height: 50px;
-      background: #1c1c1c;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
+      top: 20px;
+      left: 175px;
+      border-radius: 50%;
+      background-color: #333;
       transition: background 0.2s;
     }
 
-    .player {
-      color: #FF9CED;
-    }
-
-    .enemy {
-      color: #FFD700;
-    }
-
-    .goal {
-      color: #00FFAA;
-    }
+    .light.on { background-color: #FFFF00; }
 
     .log {
       margin-top: 20px;
-      min-height: 40px;
+      min-height: 30px;
       font-size: 1rem;
-      opacity: 0.9;
     }
 
     a.button {
@@ -66,82 +86,67 @@
 </head>
 <body>
 
-  <h1>Mini RPG Dungeon</h1>
-  <p>Use arrow keys to move your character (🤺). Reach the goal (💎) and avoid enemies (👾).</p>
+  <h1>FNAF Mini Game</h1>
+  <p>Click doors to close them and survive the night!</p>
 
-  <div id="game-container"></div>
-  <div class="log" id="log">Move with arrow keys.</div>
+  <div id="game-room">
+    <div id="leftDoor" class="door"></div>
+    <div id="rightDoor" class="door"></div>
+    <div id="animatronic" class="animatronic"></div>
+    <div id="light" class="light"></div>
+  </div>
+
+  <div class="log" id="log">Night started...</div>
   <a class="button" href="index.html">Back to Home</a>
 
   <script>
-    const rows = 8;
-    const cols = 8;
-    const container = document.getElementById("game-container");
+    const leftDoor = document.getElementById("leftDoor");
+    const rightDoor = document.getElementById("rightDoor");
+    const animatronic = document.getElementById("animatronic");
+    const light = document.getElementById("light");
     const log = document.getElementById("log");
 
-    let playerPos = {x: 0, y: 0};
-    const enemyPos = {x: 5, y: 5};
-    const goalPos = {x: 7, y: 7};
+    let leftClosed = false;
+    let rightClosed = false;
+    let gameOver = false;
 
-    const grid = [];
-    for(let y=0; y<rows; y++){
-      const row = [];
-      for(let x=0; x<cols; x++){
-        const cell = document.createElement("div");
-        cell.classList.add("cell");
-        container.appendChild(cell);
-        row.push(cell);
-      }
-      grid.push(row);
-    }
+    leftDoor.addEventListener("click", () => {
+      if(gameOver) return;
+      leftClosed = !leftClosed;
+      leftDoor.classList.toggle("closed");
+      log.textContent = leftClosed ? "Left door closed!" : "Left door open!";
+    });
 
-    function render() {
-      for(let y=0; y<rows; y++){
-        for(let x=0; x<cols; x++){
-          grid[y][x].textContent = "";
-          grid[y][x].className = "cell";
+    rightDoor.addEventListener("click", () => {
+      if(gameOver) return;
+      rightClosed = !rightClosed;
+      rightDoor.classList.toggle("closed");
+      log.textContent = rightClosed ? "Right door closed!" : "Right door open!";
+    });
+
+    light.addEventListener("click", () => {
+      light.classList.toggle("on");
+      log.textContent = light.classList.contains("on") ? "Light on!" : "Light off!";
+    });
+
+    function moveAnimatronic() {
+      if(gameOver) return;
+
+      const chance = Math.random();
+      if(chance < 0.4) {
+        animatronic.style.display = "block";
+        log.textContent = "Animatronic spotted!";
+        if((Math.random() < 0.5 && !leftClosed) || (Math.random() >= 0.5 && !rightClosed)) {
+          log.textContent = "💀 You were caught! Game Over.";
+          gameOver = true;
         }
-      }
-      grid[playerPos.y][playerPos.x].textContent = "🤺";
-      grid[playerPos.y][playerPos.x].classList.add("player");
-
-      grid[enemyPos.y][enemyPos.x].textContent = "👾";
-      grid[enemyPos.y][enemyPos.x].classList.add("enemy");
-
-      grid[goalPos.y][goalPos.x].textContent = "💎";
-      grid[goalPos.y][goalPos.x].classList.add("goal");
-    }
-
-    function movePlayer(dx, dy){
-      const newX = playerPos.x + dx;
-      const newY = playerPos.y + dy;
-      if(newX < 0 || newX >= cols || newY < 0 || newY >= rows) return;
-      playerPos.x = newX;
-      playerPos.y = newY;
-
-      if(playerPos.x === enemyPos.x && playerPos.y === enemyPos.y){
-        log.textContent = "You died. Game Over.";
-        document.removeEventListener("keydown", handleKey);
-      } else if(playerPos.x === goalPos.x && playerPos.y === goalPos.y){
-        log.textContent = "You reached the treasure! Victory!";
-        document.removeEventListener("keydown", handleKey);
       } else {
-        log.textContent = "Keep moving...";
-      }
-      render();
-    }
-
-    function handleKey(e){
-      switch(e.key){
-        case "ArrowUp": movePlayer(0, -1); break;
-        case "ArrowDown": movePlayer(0, 1); break;
-        case "ArrowLeft": movePlayer(-1, 0); break;
-        case "ArrowRight": movePlayer(1, 0); break;
+        animatronic.style.display = "none";
+        if(!gameOver) log.textContent = "Safe... for now.";
       }
     }
 
-    document.addEventListener("keydown", handleKey);
-    render();
+    setInterval(moveAnimatronic, 3000);
   </script>
 
 </body>
