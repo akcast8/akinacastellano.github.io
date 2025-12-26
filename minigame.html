@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mini RPG | Akina Castellano</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .game-box {
+      max-width: 500px;
+      margin: auto;
+      background: #1c1c1c;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin: 8px;
+      border: none;
+      border-radius: 6px;
+      background: #FF9CED;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    .log {
+      margin-top: 20px;
+      min-height: 60px;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>⚔️ The Dungeon</h1>
+  <p>A tiny RPG built just for fun</p>
+
+  <div class="game-box">
+    <div class="stats">
+      <div>You: <span id="playerHP">100</span> HP</div>
+      <div>Enemy: <span id="enemyHP">80</span> HP</div>
+    </div>
+
+    <button onclick="attack()">Attack</button>
+    <button onclick="defend()">Defend</button>
+    <button onclick="heal()">Heal</button>
+
+    <div class="log" id="log">An enemy appears!</div>
+  </div>
+
+  <br />
+  <a class="button" href="index.html">Back to Home</a>
+
+  <script>
+    let playerHP = 100;
+    let enemyHP = 80;
+    let defending = false;
+
+    function updateUI(message) {
+      document.getElementById("playerHP").textContent = playerHP;
+      document.getElementById("enemyHP").textContent = enemyHP;
+      document.getElementById("log").textContent = message;
+    }
+
+    function enemyTurn() {
+      if (enemyHP <= 0) return;
+
+      let damage = Math.floor(Math.random() * 15) + 5;
+      if (defending) {
+        damage = Math.floor(damage / 2);
+        defending = false;
+      }
+
+      playerHP -= damage;
+      updateUI(`The enemy attacks dealing ${damage} damage!`);
+
+      if (playerHP <= 0) {
+        updateUI("You died.");
+      }
+    }
+
+    function attack() {
+      let damage = Math.floor(Math.random() * 20) + 8;
+      enemyHP -= damage;
+      updateUI(`You attack dealing ${damage} damage!`);
+
+      if (enemyHP <= 0) {
+        updateUI("You win!");
+        return;
+      }
+      setTimeout(enemyTurn, 700);
+    }
+
+    function defend() {
+      defending = true;
+      updateUI("You defend.");
+      setTimeout(enemyTurn, 700);
+    }
+
+    function heal() {
+      let healAmount = Math.floor(Math.random() * 15) + 10;
+      playerHP = Math.min(playerHP + healAmount, 100);
+      updateUI(`You healed ${healAmount} HP.`);
+      setTimeout(enemyTurn, 700);
+    }
+  </script>
+
+</body>
+</html>
