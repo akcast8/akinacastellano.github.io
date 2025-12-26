@@ -22,7 +22,7 @@
   <section>
     <img src="assets/profile.jpg" alt="Akina Castellano" class="profile-image">
 
-    <p>
+    <p class="about-me">
         I'm a Computer Science graduate with a strong foundation in software development, AI problem-solving, 
         and game design. Over the years, I've built a variety of projects ranging from mobile applications 
         to interactive games and intelligent systems. I enjoy combining logical problem-solving with creative 
@@ -54,10 +54,10 @@
           }
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.25 }
     );
   
-    document.querySelectorAll("section").forEach(section => {
+    document.querySelectorAll(".about-me").forEach(section => {
       section.classList.add("hidden");
       observer.observe(section);
     });
