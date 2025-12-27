@@ -311,7 +311,6 @@ ul ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    margin-top: 20px;
 }
   
 .skills-grid h3 {
@@ -334,6 +333,5 @@ ul ul {
 .skills-grid > div {
     padding: 10px;
     border-radius: 5px;
-    background: #ffc7f5;
 }
   
