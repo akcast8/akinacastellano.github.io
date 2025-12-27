@@ -267,3 +267,14 @@ a.button:hover {
     height: auto;
     display: block;
 }
+
+ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+ul ul {
+    margin-left: 20px;
+    padding-left: 20px;
+    list-style-type: disc;
+}
