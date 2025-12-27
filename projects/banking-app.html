@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
 
   <header>
@@ -22,37 +24,37 @@
 
   <section>
     <h2>Project Overview</h2>
-    <p> Designed and developed a desktop banking application featuring a graphical user 
-        interface and secure database integration to manage financial transactions and user 
-        accounts. The system emphasizes role-based access control, data integrity, and efficient 
-        financial operations.
+    <p> Designed and developed a desktop banking application featuring a graphical user
+      interface and secure database integration to manage financial transactions and user
+      accounts. The system emphasizes role-based access control, data integrity, and efficient
+      financial operations.
     </p>
 
     <img src="assets/banking-er-model.jpg" alt="banking-er-model" class="banking-er-model">
 
     <h3>Tech Stack</h3>
     <ul>
-        <li><strong>Programming Language:</strong> Python
-          <ul>
-            <li>Implemented the application logic and integrated the user interface with backend operations.</li>
-          </ul>
-        </li>
-        <li><strong>GUI Framework:</strong> Tkinter
-          <ul>
-            <li>Designed and built the graphical user interface for Manager, Teller, and Customer roles.</li>
-          </ul>
-        </li>
-        <li><strong>Database:</strong> PostgreSQL & SQL 
+      <li><strong>Programming Language:</strong> Python
+        <ul>
+          <li>Implemented the application logic and integrated the user interface with backend operations.</li>
+        </ul>
+      </li>
+      <li><strong>GUI Framework:</strong> Tkinter
+        <ul>
+          <li>Designed and built the graphical user interface for Manager, Teller, and Customer roles.</li>
+        </ul>
+      </li>
+      <li><strong>Database:</strong> PostgreSQL & SQL
         <ul>
           <li>Created and managed the relational database for accounts, transactions, and user data.</li>
         </ul>
       </li>
-        <li><strong>Database Design:</strong> Schema & Access Control
+      <li><strong>Database Design:</strong> Schema & Access Control
         <ul>
           <li>Designed role-based access, data integrity, and secure transaction handling.</li>
         </ul>
       </li>
-        <li><strong>Project Management:</strong> Jira 
+      <li><strong>Project Management:</strong> Jira
         <ul>
           <li>Coordinated tasks, tracked progress, and ensured efficient workflow.</li>
         </ul>
@@ -77,7 +79,7 @@
       <li>Integrated PostgreSQL for persistent data storage</li>
       <li>Designed database schema to support scalable financial operations</li>
     </ul>
-    
+
     <a class="button" href="../projects.html">Back to Projects</a>
   </section>
 
@@ -100,7 +102,7 @@
       },
       { threshold: 0.1 }
     );
-  
+
     document.querySelectorAll("section").forEach(section => {
       section.classList.add("hidden");
       observer.observe(section);
@@ -108,4 +110,5 @@
   </script>
 
 </body>
+
 </html>

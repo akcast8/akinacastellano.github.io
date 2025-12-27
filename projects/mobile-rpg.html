@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
 
   <header>
@@ -22,17 +24,33 @@
 
   <section>
     <h2>Project Overview</h2>
-    <p> Designed and developed a 2D RPG mobile game in Android Studio that features character selection, 
-        progressively challenging levels, and dynamic enemy encounters. The project demonstrates core mobile 
-        game development concepts including game state management, difficulty scaling, and UI integration.
+    <p> Designed and developed a 2D RPG mobile game in Android Studio that features character selection,
+      progressively challenging levels, and dynamic enemy encounters. The project demonstrates core mobile
+      game development concepts including game state management, difficulty scaling, and UI integration.
     </p>
 
     <h3>Tech Stack</h3>
     <ul>
-        <li><strong>Programming Language:</strong> Java - Implemented core gameplay logic, character selection, and combat mechanics.</li>
-        <li><strong>IDE & SDK:</strong> Android Studio & Android SDK - Developed, tested, and deployed the game for Android devices.</li>
-        <li><strong>UI & Game State Management:</strong> Android Views and custom logic - Managed game levels, scoreboards, and player progression.</li>
-        <li><strong>Project Management:</strong> Jira - Planned tasks, tracked progress, and coordinated team workflow.</li>
+      <li><strong>Programming Language:</strong> Java
+        <ul>
+          <li>Implemented core gameplay logic, character selection, and combat mechanics.</li>
+        </ul>
+      </li>
+      <li><strong>IDE & SDK:</strong> Android Studio & Android SDK
+        <ul>
+          <li>Developed, tested, and deployed the game for Android devices.</li>
+        </ul>
+      </li>
+      <li><strong>UI & Game State Management:</strong> Android Views and custom logic
+        <ul>
+          <li> Managed game levels, scoreboards, and player progression.</li>
+        </ul>
+      </li>
+      <li><strong>Project Management:</strong> Jira
+        <ul>
+          <li>Planned tasks, tracked progress, and coordinated team workflow.</li>
+        </ul>
+      </li>
     </ul>
 
 
@@ -53,7 +71,7 @@
       <li>Built a scoreboard system to record and display player performance data</li>
       <li>Managed project planning and team coordination using Jira</li>
     </ul>
-      
+
     <a class="button" href="../projects.html">Back to Projects</a>
   </section>
 
@@ -76,7 +94,7 @@
       },
       { threshold: 0.1 }
     );
-  
+
     document.querySelectorAll("section").forEach(section => {
       section.classList.add("hidden");
       observer.observe(section);
@@ -84,4 +102,5 @@
   </script>
 
 </body>
+
 </html>

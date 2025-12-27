@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
 
   <header>
@@ -22,9 +24,11 @@
 
   <section>
     <h2>Project Overview</h2>
-    <p> Developed a mobile application in collaboration with an Emory University physician to promote melanoma awareness and 
-        support early skin cancer detection through image-based screening and educational resources. The app combines machine 
-        learning-powered analysis with guided clinical assessment to help users make informed health decisions.
+    <p> Developed a mobile application in collaboration with an Emory University physician to promote melanoma awareness
+      and
+      support early skin cancer detection through image-based screening and educational resources. The app combines
+      machine
+      learning-powered analysis with guided clinical assessment to help users make informed health decisions.
     </p>
 
     <img src="assets/brochure_page_1.jpg" alt="brochure_page_1" class="brochure-image">
@@ -32,11 +36,31 @@
 
     <h3>Tech Stack</h3>
     <ul>
-        <li><strong>Programming Language:</strong> Swift - Used to implement the app's core features and user interface.</li>
-        <li><strong>IDE & SDK:</strong> Xcode & iOS SDK - Apple's development environment and tools for building, testing, and deploying iOS apps.</li>
-        <li><strong>Machine Learning:</strong> Apple Create ML - Developed and trained models for melanoma detection from skin images.</li>
-        <li><strong>Backend & Data Storage:</strong> Firebase - Secured user-specific records, scan history, and image storage.</li>
-        <li><strong>Project Management:</strong> Jira - Tracked tasks, milestones, and team collaboration throughout development.</li>
+      <li><strong>Programming Language:</strong> Swift
+        <ul>
+          <li>Used to implement the app's core features and user interface.</li>
+        </ul>
+      </li>
+      <li><strong>IDE & SDK:</strong> Xcode & iOS SDK
+        <ul>
+          <li>Apple's development environment and tools for building, testing, and deploying iOS apps.</li>
+        </ul>
+      </li>
+      <li><strong>Machine Learning:</strong> Apple Create ML
+        <ul>
+          <li>Developed and trained models for melanoma detection from skin images.</li>
+        </ul>
+      </li>
+      <li><strong>Backend & Data Storage:</strong> Firebase
+        <ul>
+          <li>Secured user-specific records, scan history, and image storage.</li>
+        </ul>
+      </li>
+      <li><strong>Project Management:</strong> Jira
+        <ul>
+          <li>Tracked tasks, milestones, and team collaboration throughout development.</li>
+        </ul>
+      </li>
     </ul>
 
     <h3>Key Features</h3>
@@ -81,7 +105,7 @@
       },
       { threshold: 0.1 }
     );
-  
+
     document.querySelectorAll("section").forEach(section => {
       section.classList.add("hidden");
       observer.observe(section);
@@ -89,4 +113,5 @@
   </script>
 
 </body>
+
 </html>

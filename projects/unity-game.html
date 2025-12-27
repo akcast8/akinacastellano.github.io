@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
 
   <header>
@@ -22,31 +24,53 @@
 
   <section>
     <h2>Project Overview</h2>
-    <p> Developed a Unity-based 3D third person survival game emphasizing real-time character control, 
-        intelligent enemy behavior, and immersive environmental interaction. The project showcases 
-        core game development principles through polished mechanics, AI systems, and player-driven exploration.
+    <p> Developed a Unity-based 3D third person survival game emphasizing real-time character control,
+      intelligent enemy behavior, and immersive environmental interaction. The project showcases
+      core game development principles through polished mechanics, AI systems, and player-driven exploration.
     </p>
 
     <div style="text-align:center; margin: 20px 0;">
-        <iframe width="560" height="315" 
-          src="https://www.youtube.com/embed/fu7uJ9P9HN0" 
-          title="Unity 3D Survival Game Demo" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
-        </iframe>
-      </div>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/fu7uJ9P9HN0"
+        title="Unity 3D Survival Game Demo" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
 
-      <h3>Tech Stack</h3>
+    <h3>Tech Stack</h3>
+    <ul>
+      <li><strong>Game Engine:</strong> Unity
         <ul>
-            <li><strong>Game Engine:</strong> Unity - Used for 3D environment creation, game logic, physics, and rendering.</li>
-            <li><strong>Programming Language:</strong> C# - Implemented player controls, AI behavior, and gameplay mechanics.</li>
-            <li><strong>AI & Navigation:</strong> NavMesh - Created dynamic pathfinding and intelligent computer behavior for NPCs and enemies.</li>
-            <li><strong>Animation:</strong> Animator with Root Motion - Developed smooth player and NPC animations for realistic movement.</li>
-            <li><strong>Version Control:</strong> Git - Managed codebase, tracked changes, and collaborated with team members.</li>
-            <li><strong>Project Management:</strong> Trello - Organized tasks, milestones, and team workflow.</li>
+          <li>Used for 3D environment creation, game logic, physics, and rendering.</li>
         </ul>
-      
+      </li>
+      <li><strong>Programming Language:</strong> C#
+        <ul>
+          <li>Implemented player controls, AI behavior, and gameplay mechanics.</li>
+        </ul>
+      </li>
+      <li><strong>AI & Navigation:</strong> NavMesh
+        <ul>
+          <li>Created dynamic pathfinding and intelligent computer behavior for NPCs and enemies.</li>
+        </ul>
+      </li>
+      <li><strong>Animation:</strong> Animator with Root Motion
+        <ul>
+          <li>Developed smooth player and NPC animations for realistic movement.</li>
+        </ul>
+      </li>
+      <li><strong>Version Control:</strong> Git
+        <ul>
+          <li>Managed codebase, tracked changes, and collaborated with team members.</li>
+        </ul>
+      </li>
+      <li><strong>Project Management:</strong> Trello
+        <ul>
+          <li>Organized tasks, milestones, and team workflow.</li>
+        </ul>
+      </li>
+    </ul>
+
 
     <h3>Key Features</h3>
     <ul>
@@ -65,7 +89,7 @@
       <li>Built interactive UI elements and menus to enhance player experience</li>
       <li>Collaborated with team members using Trello and version control</li>
     </ul>
-    
+
     <a class="button" href="../projects.html">Back to Projects</a>
   </section>
 
@@ -88,7 +112,7 @@
       },
       { threshold: 0.1 }
     );
-  
+
     document.querySelectorAll("section").forEach(section => {
       section.classList.add("hidden");
       observer.observe(section);
@@ -96,4 +120,5 @@
   </script>
 
 </body>
+
 </html>
