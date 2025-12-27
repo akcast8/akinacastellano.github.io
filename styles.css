@@ -67,7 +67,7 @@ nav a:hover {
 }
 
 section {
-    padding: 30px 20px;
+    padding: 20px 20px;
     max-width: 1000px;
     margin: 0 auto;
 }
@@ -329,12 +329,11 @@ ul ul {
     .skills-grid {
       grid-template-columns: 1fr;
     }
-
+}
 
 .skills-grid > div {
-    padding: 16px;
-    border-radius: 10px;
+    padding: 10px;
+    border-radius: 5px;
     background: #ffc7f5;
-    }
 }
   
