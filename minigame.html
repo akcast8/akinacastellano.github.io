@@ -138,7 +138,6 @@ canvas {
             }
 
             goalie.x += goalie.speed * goalie.direction;
-
             if (goalie.x <= 0) {
                 goalie.x = 0;
                 goalie.direction = 1;
@@ -148,7 +147,7 @@ canvas {
                 goalie.direction = -1;
                 goalieState = "left";
             } else {
-                goalieState = "center";
+                goalieState = goalie.direction === 1 ? "right" : "left";
             }
         }
 
