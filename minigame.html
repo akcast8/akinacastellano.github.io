@@ -98,6 +98,7 @@ canvas {
                 puck.speed = 10;
                 shooterState = "swing";
                 shooterTimer = 0;
+                goalieState = "left";
             }
         });
 
@@ -107,6 +108,7 @@ canvas {
             puck.y = shooter.y - 30;
             shooterState = "idle";
             shooterTimer = 0;
+            goalieState = "center";
         }
 
         function rectCircleColliding(circle, rect) {
@@ -120,20 +122,21 @@ canvas {
         function update() {
             if (shooting) {
                 shooterTimer++;
-                if (shooterTimer > 6) shooterState = "follow";
+                if (shooterTimer > 6) {
+                    shooterState = "follow";
+                    goalieState = "right";
+                }
             }
 
             if (shooting) {
                 puck.y -= puck.speed;
                 if (rectCircleColliding(puck, goalie)) {
-                    goalieState = "left";
                     resetPuck();
                 }
                 if (puck.y < goalie.y) {
                     score++;
                     scoreEl.textContent = score;
                     goalie.speed += 0.3;
-                    goalieState = "right";
                     resetPuck();
                 }
             } else {
