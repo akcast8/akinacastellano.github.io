@@ -20,13 +20,21 @@ canvas {
 }
 #info {
     position: absolute;
-    top: 20px;
+    top: 50px;
     font-size: 18px;
+    color: black;
+}
+#title {
+    position: absolute;
+    top: 20px;
+    font-size: 25px;
+    color: black;
+    font-weight: bold;
 }
 </style>
 </head>
 <body>
-
+    <div id="title">Hockey Shoot Out</div>
     <div id="info">Score: <span id="score">0</span></div>
     <canvas id="game" width="600" height="800"></canvas>
 
@@ -105,7 +113,7 @@ canvas {
         function resetPuck() {
             shooting = false;
             puck.speed = 0;
-            puck.y = shooter.y - 30;
+            puck.y = shooter.y - 5;
             shooterState = "idle";
             shooterTimer = 0;
             goalieState = "center";
@@ -141,7 +149,7 @@ canvas {
                 }
             } else {
                 puck.x = shooter.x + shooter.width / 2;
-                puck.y = shooter.y - 30;
+                puck.y = shooter.y - 5;
             }
 
             goalie.x += goalie.speed * goalie.direction;
