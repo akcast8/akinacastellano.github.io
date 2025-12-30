@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta charset="UTF-8">
 <title>Hockey Shoot Out</title>
 <style>
@@ -17,10 +18,14 @@ body {
 canvas {
     background: #e8f4ff;
     border: 4px solid #222;
+    width: 90vw;
+    max-width: 600px;
+    height: auto;
+    touch-action: none;
 }
-#info {
+/* #info {
     position: absolute;
-    top: 50px;
+    top: 60px;
     font-size: 18px;
     color: black;
 }
@@ -30,7 +35,18 @@ canvas {
     font-size: 25px;
     color: black;
     font-weight: bold;
+} */
+
+#title {
+    top: 10px;
+    font-size: clamp(18px, 5vw, 25px);
 }
+
+#info {
+    top: 45px;
+    font-size: clamp(14px, 4vw, 18px);
+}
+
 </style>
 </head>
 <body>
@@ -42,6 +58,19 @@ canvas {
         const canvas = document.getElementById("game");
         const ctx = canvas.getContext("2d");
         const scoreEl = document.getElementById("score");
+
+        function resizeCanvas() {
+            const scale = Math.min(
+                window.innerWidth / 600,
+                window.innerHeight / 800
+            );
+
+            canvas.style.width = 600 * scale + "px";
+            canvas.style.height = 800 * scale + "px";
+        }
+
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
 
         let score = 0;
         let shooting = false;
@@ -100,7 +129,18 @@ canvas {
             }
         });
 
-        canvas.addEventListener("click", () => {
+        canvas.addEventListener("touchmove", (e) => {
+            if (!shooting) {
+                const rect = canvas.getBoundingClientRect();
+                const touch = e.touches[0];
+                shooter.x = (touch.clientX - rect.left) * (canvas.width / rect.width) - shooter.width / 2;
+                shooter.x = Math.max(0, Math.min(canvas.width - shooter.width, shooter.x));
+                puck.x = shooter.x + shooter.width / 2;
+            }
+            e.preventDefault();
+        });
+
+        function shoot() {
             if (!shooting) {
                 shooting = true;
                 puck.speed = 10;
@@ -108,7 +148,23 @@ canvas {
                 shooterTimer = 0;
                 goalieState = "left";
             }
+        }
+
+        canvas.addEventListener("click", shoot);
+        canvas.addEventListener("touchstart", (e) => {
+            shoot();
+            e.preventDefault();
         });
+
+        // canvas.addEventListener("click", () => {
+        //     if (!shooting) {
+        //         shooting = true;
+        //         puck.speed = 10;
+        //         shooterState = "swing";
+        //         shooterTimer = 0;
+        //         goalieState = "left";
+        //     }
+        // });
 
         function resetPuck() {
             shooting = false;
