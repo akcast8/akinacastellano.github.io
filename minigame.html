@@ -127,11 +127,20 @@ canvas {
             //     goalie.direction = -1;
             // }
 
-            // if (goalie.direction === 1) goalieState = "right";
-            // else if (goalie.direction === -1) goalieState = "left";
-            // else goalieState = "center";
-            goalie.x = canvas.width / 2;
+            goalie.x = canvas.width / 2 - 50;
             goalieState = "center";
+            goalie.x += goalie.speed * goalie.direction;
+            if (goalie.x >= canvas.width - 70) {
+                goalie.x = canvas.width - 70;
+                goalie.direction = -1;
+            } else if (goalie.x <= 70) {
+                goalie.x = 70;
+                goalie.direction = 1;
+            }
+
+            if (goalie.direction === 1) goalieState = "right";
+            else if (goalie.direction === -1) goalieState = "left";
+            else goalieState = "center";
 
             if (shooting) {
                 shooterTimer++;
