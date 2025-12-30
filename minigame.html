@@ -138,8 +138,10 @@ canvas {
             }
 
             goalie.x += goalie.speed * goalie.direction;
-            if (goalie.x <= 0 || goalie.x + goalie.width >= canvas.width)
+            if (goalie.x <= 20 || goalie.x + goalie.width >= canvas.width - 20)
                 goalie.direction *= -1;
+
+            goalieState = goalie.direction === 1 ? "right" : "left";
         }
 
         function draw() {
