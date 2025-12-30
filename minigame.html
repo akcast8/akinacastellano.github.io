@@ -130,7 +130,7 @@ canvas {
             // if (goalie.direction === 1) goalieState = "right";
             // else if (goalie.direction === -1) goalieState = "left";
             // else goalieState = "center";
-            goalie.x = 0;
+            goalie.x = canvas.width / 2;
             goalieState = "center";
 
             if (shooting) {
@@ -144,16 +144,16 @@ canvas {
                 if (puck.y < goalie.y) {
                 score++;
                 scoreEl.textContent = score;
-                goalie.speed += 0.2;
+                goalie.speed += 0.1;
                 resetPuck();
                 }
             } else {
                 puck.x = shooter.x + shooter.width / 2;
                 puck.y = shooter.y - 15;
             }
-            }
+        }
 
-            function draw() {
+        function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             ctx.fillStyle = "#cc0000";
