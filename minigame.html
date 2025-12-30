@@ -1,155 +1,168 @@
-<script>
-    const canvas = document.getElementById("game");
-    const ctx = canvas.getContext("2d");
-    const scoreEl = document.getElementById("score");
-    
-    let score = 0;
-    let shooting = false;
-    
-    // Shooter sprites
-    const shooterSprites = {
-        idle: "assets/shooter_idle.PNG",
-        swing: "assets/shooter_swing.PNG",
-        follow: "assets/shooter_follow.PNG"
-    };
-    
-    // Goalie sprites
-    const goalieSprites = {
-        center: "assets/goalie_center.PNG",
-        left: "assets/goalie_left.PNG",
-        right: "assets/goalie_right.PNG"
-    };
-    
-    // Game objects
-    const shooter = { x: canvas.width / 2 - 50, y: canvas.height - 160, width: 100, height: 100 };
-    const puck = { x: canvas.width / 2, y: shooter.y - 15, radius: 10, speed: 0 };
-    const goalie = { x: canvas.width / 2 - 50, y: 150, width: 100, height: 100, speed: 3 };
-    
-    let shooterState = "idle";
-    let shooterTimer = 0;
-    let goalieState = "center";
-    
-    // Timer-based goalie movement
-    let goalieTimer = 0;
-    const goalieInterval = 60; // frames
-    let goalieDirection = 1;    // 1 = right, -1 = left
-    
-    // Load images first
-    function loadImages(sources, callback) {
-        const images = {};
-        let loaded = 0;
-        const total = Object.keys(sources).length;
-        for (let key in sources) {
-            images[key] = new Image();
-            images[key].src = sources[key];
-            images[key].onload = () => {
-                loaded++;
-                if (loaded === total) callback(images);
-            };
-        }
-    }
-    
-    canvas.addEventListener("mousemove", (e) => {
-        if (!shooting) {
-            const rect = canvas.getBoundingClientRect();
-            shooter.x = e.clientX - rect.left - shooter.width / 2;
-            shooter.x = Math.max(0, Math.min(canvas.width - shooter.width, shooter.x));
-            puck.x = shooter.x + shooter.width / 2;
-        }
-    });
-    
-    canvas.addEventListener("click", () => {
-        if (!shooting) {
-            shooting = true;
-            puck.speed = 10;
-            shooterState = "swing";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hockey Shoot Out</title>
+<style>
+body {
+    background: #0b1e2d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+canvas {
+    background: #e8f4ff;
+    border: 4px solid #222;
+}
+#info {
+    position: absolute;
+    top: 20px;
+    font-size: 18px;
+}
+</style>
+</head>
+<body>
+
+    <div id="info">Score: <span id="score">0</span></div>
+    <canvas id="game" width="600" height="800"></canvas>
+
+    <script>
+        const canvas = document.getElementById("game");
+        const ctx = canvas.getContext("2d");
+        const scoreEl = document.getElementById("score");
+
+        let score = 0;
+        let shooting = false;
+
+        const shooterSprites = {
+            idle: new Image(),
+            swing: new Image(),
+            follow: new Image()
+        };
+        shooterSprites.idle.src = "assets/shooter_idle.PNG";
+        shooterSprites.swing.src = "assets/shooter_swing.PNG";
+        shooterSprites.follow.src = "assets/shooter_follow.PNG";
+
+        const goalieSprites = {
+            center: new Image(),
+            left: new Image(),
+            right: new Image()
+        };
+        goalieSprites.center.src = "assets/goalie_center.PNG";
+        goalieSprites.left.src = "assets/goalie_left.PNG";
+        goalieSprites.right.src = "assets/goalie_right.PNG";
+
+        const shooter = {
+            x: canvas.width / 2 - 50,
+            y: canvas.height - 160,
+            width: 100,
+            height: 100
+        };
+
+        const puck = {
+            x: canvas.width / 2,
+            y: shooter.y - 15,
+            radius: 10,
+            speed: 0
+        };
+
+        const goalie = {
+            x: canvas.width / 2 - 75,
+            y: 150,
+            width: 100,
+            height: 100,
+            speed: 3,
+            direction: 1
+        };
+
+        let shooterState = "idle";
+        let shooterTimer = 0;
+        let goalieState = "center";
+
+        canvas.addEventListener("mousemove", (e) => {
+            if (!shooting) {
+                const rect = canvas.getBoundingClientRect();
+                shooter.x = e.clientX - rect.left - shooter.width / 2;
+                shooter.x = Math.max(0, Math.min(canvas.width - shooter.width, shooter.x));
+                puck.x = shooter.x + shooter.width / 2;
+            }
+        });
+
+        canvas.addEventListener("click", () => {
+            if (!shooting) {
+                shooting = true;
+                puck.speed = 10;
+                shooterState = "swing";
+                shooterTimer = 0;
+            }
+        });
+
+        function resetPuck() {
+            shooting = false;
+            puck.speed = 0;
+            puck.y = shooter.y - 15;
+            shooterState = "idle";
             shooterTimer = 0;
         }
-    });
-    
-    function resetPuck() {
-        shooting = false;
-        puck.speed = 0;
-        puck.y = shooter.y - 15;
-        shooterState = "idle";
-        shooterTimer = 0;
-    }
-    
-    function rectCircleColliding(circle, rect) {
-        const distX = Math.abs(circle.x - rect.x - rect.width / 2);
-        const distY = Math.abs(circle.y - rect.y - rect.height / 2);
-        if (distX > (rect.width / 2 + circle.radius)) return false;
-        if (distY > (rect.height / 2 + circle.radius)) return false;
-        return true;
-    }
-    
-    function startGame(shooterImgs, goalieImgs) {
+
+        function rectCircleColliding(circle, rect) {
+            const distX = Math.abs(circle.x - rect.x - rect.width / 2);
+            const distY = Math.abs(circle.y - rect.y - rect.height / 2);
+            if (distX > (rect.width / 2 + circle.radius)) return false;
+            if (distY > (rect.height / 2 + circle.radius)) return false;
+            return true;
+        }
+
         function update() {
-            // Goalie timer movement
-            goalieTimer++;
-            if (goalieTimer >= goalieInterval) {
-                goalieDirection *= -1;
-                goalieTimer = 0;
-            }
-            goalie.x += goalie.speed * goalieDirection;
-            // Clamp
-            if (goalie.x < 0) goalie.x = 0;
-            if (goalie.x + goalie.width > canvas.width) goalie.x = canvas.width - goalie.width;
-            // Sprite
-            goalieState = goalieDirection === 1 ? "right" : "left";
-    
-            // Shooter animation
             if (shooting) {
                 shooterTimer++;
                 if (shooterTimer > 6) shooterState = "follow";
             }
-    
-            // Puck movement
+
             if (shooting) {
                 puck.y -= puck.speed;
                 if (rectCircleColliding(puck, goalie)) resetPuck();
                 if (puck.y < goalie.y) {
-                    score++;
-                    scoreEl.textContent = score;
-                    goalie.speed += 0.2;
-                    resetPuck();
+                score++;
+                scoreEl.textContent = score;
+                goalie.speed += 0.2;
+                resetPuck();
                 }
             } else {
                 puck.x = shooter.x + shooter.width / 2;
                 puck.y = shooter.y - 15;
             }
         }
-    
+
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            // Net
+
             ctx.fillStyle = "#cc0000";
             ctx.fillRect(150, 120, 300, 10);
-            // Goalie
-            ctx.drawImage(goalieImgs[goalieState], goalie.x, goalie.y, goalie.width, goalie.height);
-            // Shooter
-            ctx.drawImage(shooterImgs[shooterState], shooter.x, shooter.y, shooter.width, shooter.height);
-            // Puck
+
+            if (goalieSprites[goalieState].complete)
+                ctx.drawImage(goalieSprites[goalieState], goalie.x, goalie.y, goalie.width, goalie.height);
+
+            if (shooterSprites[shooterState].complete)
+                ctx.drawImage(shooterSprites[shooterState], shooter.x, shooter.y, shooter.width, shooter.height);
+
             ctx.beginPath();
             ctx.arc(puck.x, puck.y, puck.radius, 0, Math.PI * 2);
             ctx.fillStyle = "black";
             ctx.fill();
         }
-    
-        function loop() {
+
+        function gameLoop() {
             update();
             draw();
-            requestAnimationFrame(loop);
+            requestAnimationFrame(gameLoop);
         }
-    
-        loop();
-    }
-    
-    // Load all sprites first
-    loadImages(shooterSprites, (shooterImgs) => {
-        loadImages(goalieSprites, (goalieImgs) => {
-            startGame(shooterImgs, goalieImgs);
-        });
-    });
+
+        gameLoop();
     </script>
-    
+</body>
+</html>
