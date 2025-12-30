@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hockey Shoot Out</title>
+    <style>
+        body {
+            background: #0b1e2d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            background: #e8f4ff;
+            border: 4px solid #222;
+        }
+        #info {
+            position: absolute;
+            top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="info">Score: <span id="score">0</span></div>
+    <canvas id="game" width="600" height="800"></canvas>
+
+    <script>
+        const canvas = document.getElementById("game");
+        const ctx = canvas.getContext("2d");
+        const scoreEl = document.getElementById("score");
+
+        let score = 0;
+        let shooting = false;
+
+        const stick = {
+            x: canvas.width / 2 - 40,
+            y: canvas.height - 80,
+            width: 80,
+            height: 10
+        }
+
+        const puck = {
+            x: canvas.width / 2,
+            y: canvas.height - 100,
+            radius: 10,
+            speed: 0
+        }
+
+        const goalie = {
+            x: 200,
+            y: 150,
+            width: 120,
+            height: 20,
+            speed: 3,
+            direction: 1
+        }
+
+        canvas.addEventListener("mousemove", (e) => {
+            if (!shooting) {
+                const rect = canvas.getBoundingClientRect();
+                stick.x = e.clientX - rect.left - stick.width / 2;
+                puck.x = stick.x + stick.width / 2;
+            }
+        });
+
+        canvas.addEventListener("click", () => {
+            if (!shooting) {
+                puck.speed = 8;
+                shooting = true;
+            }
+        });
+
+        function resetPuck() {
+            shooting = false;
+            puck.speed = 0;
+            puck.y = canvas.height - 100;
+        }
+
+        function rectCircleColliding(circle, rect) {
+            const distX = Math.abs(circle.x - rect.x - rect.width / 2);
+            const distY = Math.abs(circle.y - rect.y - rect.height / 2);
+
+            if (distX > (rect.width / 2 + circle.radius)) return false;
+            if (distY > (rect.height / 2 + circle.radius)) return false;
+
+            return true;
+        }
+
+        function update() {
+            goalie.x += goalie.speed * goalie.direction;
+            if (goalie.x <= 0 || goalie.x + goalie.width >= canvas.width) {
+                goalie.direction *= -1;
+            }
+
+            if (shooting) {
+                puck.y -= puck.speed;
+                if (rectCircleColliding(puck, goalie)) {
+                    resetPuck();
+                }
+                if (puck.y < goalie.y) {
+                    score++;
+                    scoreEl.textContent = score;
+                    resetPuck();
+                }
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#cc0000";
+            ctx.fillRect(150, 100, 300, 10);
+            
+            ctx.fillStyle = "#333";
+            ctx.fillRect(goalie.x, goalie.y, goalie.width, goalie.height);
+
+            ctx.fillStyle = "#654321";
+            ctx.fillRect(stick.x, stick.y, stick.width, stick.height);
+
+            ctx.beginPath();
+            ctx.arc(puck.x, puck.y, puck.radius, 0, Math.PI * 2);
+            ctx.fillStyle = "black";
+            ctx.fill();
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        gameLoop();
+    </script>
+</body>
+</html>
