@@ -98,7 +98,6 @@ canvas {
                 puck.speed = 15;
                 shooterState = "swing";
                 shooterTimer = 0;
-                goalieState = "left";
             }
         });
 
@@ -128,13 +127,14 @@ canvas {
             if (shooting) {
                 puck.y -= puck.speed;
                 if (rectCircleColliding(puck, goalie)) {
+                    goalieState = "left";
                     resetPuck();
-                    goalieState = "right";
                 }
                 if (puck.y < goalie.y) {
                     score++;
                     scoreEl.textContent = score;
                     goalie.speed += 0.3;
+                    goalieState = "right";
                     resetPuck();
                 }
             } else {
@@ -166,8 +166,8 @@ canvas {
         }
 
         function gameLoop() {
-            draw();
             update();
+            draw();
             requestAnimationFrame(gameLoop);
         }
 
