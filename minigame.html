@@ -117,19 +117,21 @@ canvas {
             return true;
         }
 
-        function update() {
-            goalie.x = canvas.width / 2 - 70;
-            goalieState = "center";
-            let goalieTimer = 0;
-            const goalieInterval = 120;
-            let goalieDirection = 1;
+        let goalieTimer = 0;
+        const goalieInterval = 120;
+        let goalieDirection = 1;
+        goalie.x = canvas.width / 2 - 70;
+        goalieState = "center";
 
+        function update() {
             goalieTimer++;
             if (goalieTimer >= goalieInterval) {
-                goalieDirection += -1;
+                goalieDirection *= -1;
                 goalieTimer = 0;
             }
             goalie.x += goalie.speed * goalieDirection;
+
+            goalieState = goalieDirection === 1 ? "right" : "left";
 
             if (shooting) {
                 shooterTimer++;
@@ -142,7 +144,7 @@ canvas {
                 if (puck.y < goalie.y) {
                 score++;
                 scoreEl.textContent = score;
-                goalie.speed += 0.1;
+                goalie.speed += 0.2;
                 resetPuck();
                 }
             } else {
