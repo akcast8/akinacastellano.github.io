@@ -38,48 +38,75 @@
         let score = 0;
         let shooting = false;
 
-        const stick = {
-            x: canvas.width / 2 - 40,
-            y: canvas.height - 80,
-            width: 80,
-            height: 10
-        }
+        const shooterSprites = {
+            idle: new Image(),
+            swing: new Image(),
+            follow: new Image()
+        };
+        shooterSprites.idle.src = "assets/shooter_idle.PNG";
+        shooterSprites.swing.src = "assets/shooter_swing.PNG";
+        shooterSprites.follow.src = "assets/shooter_follow.PNG";
+
+        const goalieSprites = {
+            center: new Image(),
+            left: new Image(),
+            right: new Image()
+        };
+        goalieSprites.center.src = "assets/goalie_center.PNG";
+        goalieSprites.left.src = "assets/goalie_left.PNG";
+        goalieSprites.right.src = "assets/goalie_right.PNG";
+
+        const shooter = {
+            x: canvas.width / 2 - 50,
+            y: canvas.height - 160,
+            width: 100,
+            height: 120
+        };
 
         const puck = {
             x: canvas.width / 2,
-            y: canvas.height - 100,
+            y: shooter.y - 15,
             radius: 10,
             speed: 0
-        }
+        };
 
         const goalie = {
-            x: 200,
+            x: canvas.width / 2 - 75,
             y: 150,
-            width: 120,
-            height: 20,
+            width: 150,
+            height: 100,
             speed: 3,
             direction: 1
-        }
+        };
+
+        let shooterState = "idle";
+        let shooterTimer = 0;
+        let goalieState = "center";
 
         canvas.addEventListener("mousemove", (e) => {
             if (!shooting) {
                 const rect = canvas.getBoundingClientRect();
-                stick.x = e.clientX - rect.left - stick.width / 2;
-                puck.x = stick.x + stick.width / 2;
+                shooter.x = e.clientX - rect.left - shooter.width / 2;
+                shooter.x = Math.max(0, Math.min(canvas.width - shooter.width, shooter.x));
+                puck.x = shooter.x + shooter.width / 2;
             }
         });
 
         canvas.addEventListener("click", () => {
             if (!shooting) {
-                puck.speed = 8;
                 shooting = true;
+                puck.speed = 10;
+                shooterState = "swing";
+                shooterTimer = 0;
             }
         });
 
         function resetPuck() {
             shooting = false;
             puck.speed = 0;
-            puck.y = canvas.height - 100;
+            puck.y = shooter.y - 15;
+            shooterState = "idle";
+            shooterTime = 0;
         }
 
         function rectCircleColliding(circle, rect) {
@@ -98,6 +125,13 @@
                 goalie.direction *= -1;
             }
 
+            goalieState = goalie.direction === -1 ? "left" : "right";
+
+            if (shooting) {
+                shooterTimer++;
+                if (shooterTimer > 6) shooterState = "follow";
+            }
+
             if (shooting) {
                 puck.y -= puck.speed;
                 if (rectCircleColliding(puck, goalie)) {
@@ -106,8 +140,12 @@
                 if (puck.y < goalie.y) {
                     score++;
                     scoreEl.textContent = score;
+                    goalie.speed += 0.2;
                     resetPuck();
                 }
+            } else {
+                puck.x = shooter.x + shooter.width / 2;
+                puck.y = shooter.y - 15;
             }
         }
 
@@ -116,11 +154,21 @@
             ctx.fillStyle = "#cc0000";
             ctx.fillRect(150, 100, 300, 10);
             
-            ctx.fillStyle = "#333";
-            ctx.fillRect(goalie.x, goalie.y, goalie.width, goalie.height);
+            ctx.drawImage(
+                goalieSprites[goalieState],
+                goalie.x,
+                goalie.y,
+                goalie.width,
+                goalie.height
+            );
 
-            ctx.fillStyle = "#654321";
-            ctx.fillRect(stick.x, stick.y, stick.width, stick.height);
+            ctx.drawImage(
+                shooterSprites[shooterState],
+                shooter.x,
+                shooter.y,
+                shooter.width,
+                shooter.height
+            );
 
             ctx.beginPath();
             ctx.arc(puck.x, puck.y, puck.radius, 0, Math.PI * 2);
