@@ -120,18 +120,16 @@ canvas {
         function update() {
             goalie.x = canvas.width / 2 - 70;
             goalieState = "center";
-            goalie.x += goalie.speed * goalie.direction;
-            if (goalie.x + goalie.width >= canvas.width) {
-                goalie.x = canvas.width - goalie.width;
-                goalie.direction = -1;
-            } else if (goalie.x + goalie.width <= 0) {
-                goalie.x = goalie.width;
-                goalie.direction = 1;
-            }
+            let goalieTimer = 0;
+            const goalieInterval = 120;
+            let goalieDirection = 1;
 
-            if (goalie.direction === 1) goalieState = "right";
-            else if (goalie.direction === -1) goalieState = "left";
-            else goalieState = "center";
+            goalieTimer++;
+            if (goalieTimer >= goalieInterval) {
+                goalieDirection += -1;
+                goalieTimer = 0;
+            }
+            goalie.x += goalie.speed * goalieDirection;
 
             if (shooting) {
                 shooterTimer++;
