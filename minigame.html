@@ -127,14 +127,28 @@ canvas {
                 puck.y -= puck.speed;
                 if (rectCircleColliding(puck, goalie)) resetPuck();
                 if (puck.y < goalie.y) {
-                score++;
-                scoreEl.textContent = score;
-                goalie.speed += 0.2;
-                resetPuck();
+                    score++;
+                    scoreEl.textContent = score;
+                    goalie.speed += 0.2;
+                    resetPuck();
                 }
             } else {
                 puck.x = shooter.x + shooter.width / 2;
                 puck.y = shooter.y - 15;
+            }
+
+            goalie.x += goalie.speed * goalie.direction;
+
+            if (goalie.x <= 0) {
+                goalie.x = 0;
+                goalie.direction = 1;
+                goalieState = "right";
+            } else if (goalie.x + goalie.width >= canvas.width) {
+                goalie.x = canvas.width - goalie.width;
+                goalie.direction = -1;
+                goalieState = "left";
+            } else {
+                goalieState = "center";
             }
         }
 
