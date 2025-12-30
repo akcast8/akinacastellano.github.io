@@ -106,7 +106,7 @@
             puck.speed = 0;
             puck.y = shooter.y - 15;
             shooterState = "idle";
-            shooterTime = 0;
+            shooterTimer = 0;
         }
 
         function rectCircleColliding(circle, rect) {
@@ -129,7 +129,9 @@
                 goalie.direction = -1;
             }
 
-            goalieState = goalie.direction === -1 ? "left" : "right";
+            if (goalie.direction === 1) goalieState = "right";
+            else if (goalie.direction === -1) goalieState = "left";
+            else goalieState = "center";
 
             if (shooting) {
                 shooterTimer++;
