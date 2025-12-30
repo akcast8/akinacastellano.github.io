@@ -118,55 +118,57 @@ canvas {
         }
 
         function update() {
-        goalie.x += goalie.speed * goalie.direction;
-        if (goalie.x <= 0) {
+            // goalie.x += goalie.speed * goalie.direction;
+            // if (goalie.x <= 0) {
+            //     goalie.x = 0;
+            //     goalie.direction = 1;
+            // } else if (goalie.x + goalie.width >= canvas.width) {
+            //     goalie.x = canvas.width - goalie.width;
+            //     goalie.direction = -1;
+            // }
+
+            // if (goalie.direction === 1) goalieState = "right";
+            // else if (goalie.direction === -1) goalieState = "left";
+            // else goalieState = "center";
             goalie.x = 0;
-            goalie.direction = 1;
-        } else if (goalie.x + goalie.width >= canvas.width) {
-            goalie.x = canvas.width - goalie.width;
-            goalie.direction = -1;
-        }
+            goalieState = "center";
 
-        if (goalie.direction === 1) goalieState = "right";
-        else if (goalie.direction === -1) goalieState = "left";
-        else goalieState = "center";
-
-        if (shooting) {
-            shooterTimer++;
-            if (shooterTimer > 6) shooterState = "follow";
-        }
-
-        if (shooting) {
-            puck.y -= puck.speed;
-            if (rectCircleColliding(puck, goalie)) resetPuck();
-            if (puck.y < goalie.y) {
-            score++;
-            scoreEl.textContent = score;
-            goalie.speed += 0.2;
-            resetPuck();
+            if (shooting) {
+                shooterTimer++;
+                if (shooterTimer > 6) shooterState = "follow";
             }
-        } else {
-            puck.x = shooter.x + shooter.width / 2;
-            puck.y = shooter.y - 15;
-        }
-        }
 
-        function draw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (shooting) {
+                puck.y -= puck.speed;
+                if (rectCircleColliding(puck, goalie)) resetPuck();
+                if (puck.y < goalie.y) {
+                score++;
+                scoreEl.textContent = score;
+                goalie.speed += 0.2;
+                resetPuck();
+                }
+            } else {
+                puck.x = shooter.x + shooter.width / 2;
+                puck.y = shooter.y - 15;
+            }
+            }
 
-        ctx.fillStyle = "#cc0000";
-        ctx.fillRect(150, 120, 300, 10);
+            function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        if (goalieSprites[goalieState].complete)
-            ctx.drawImage(goalieSprites[goalieState], goalie.x, goalie.y, goalie.width, goalie.height);
+            ctx.fillStyle = "#cc0000";
+            ctx.fillRect(150, 120, 300, 10);
 
-        if (shooterSprites[shooterState].complete)
-            ctx.drawImage(shooterSprites[shooterState], shooter.x, shooter.y, shooter.width, shooter.height);
+            if (goalieSprites[goalieState].complete)
+                ctx.drawImage(goalieSprites[goalieState], goalie.x, goalie.y, goalie.width, goalie.height);
 
-        ctx.beginPath();
-        ctx.arc(puck.x, puck.y, puck.radius, 0, Math.PI * 2);
-        ctx.fillStyle = "black";
-        ctx.fill();
+            if (shooterSprites[shooterState].complete)
+                ctx.drawImage(shooterSprites[shooterState], shooter.x, shooter.y, shooter.width, shooter.height);
+
+            ctx.beginPath();
+            ctx.arc(puck.x, puck.y, puck.radius, 0, Math.PI * 2);
+            ctx.fillStyle = "black";
+            ctx.fill();
         }
 
         function gameLoop() {
