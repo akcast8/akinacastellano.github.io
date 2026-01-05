@@ -136,7 +136,7 @@ canvas {
 
         const goalie = {
             x: canvas.width / 2 - 75,
-            y: 120,
+            y: 150,
             width: 150,
             height: 150,
             speed: 3,
@@ -238,7 +238,7 @@ canvas {
             }
 
             ctx.fillStyle = "#cc0000";
-            ctx.fillRect(150, 120, 300, 10);
+            ctx.fillRect(150, 210, 300, 10);
 
             if (goalieSprites[goalieState].complete)
                 ctx.drawImage(goalieSprites[goalieState], goalie.x, goalie.y, goalie.width, goalie.height);
