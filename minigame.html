@@ -221,7 +221,7 @@ canvas {
 
             if (shooting) {
                 puck.y -= puck.speed;
-                if (rectCircleColliding(puck, goalie, 25)) {
+                if (rectCircleColliding(puck, goalie, 30)) {
                     resetPuck();
                 }
                 if (rectCircleColliding(puck, goalLine, 0)) {
