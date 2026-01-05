@@ -60,6 +60,9 @@ canvas {
     border-radius: 10px;
 }
 @media (max-width: 600px) {
+    #homeBtn {
+        top: 40px;
+    }
     #info {
         top: 150px;
     }
@@ -226,7 +229,7 @@ canvas {
             }
 
             goalie.x += goalie.speed * goalie.direction;
-            if (goalie.x <= 70 || goalie.x + goalie.width >= canvas.width - 70)
+            if (goalie.x <= 125 || goalie.x + goalie.width >= canvas.width - 125)
                 goalie.direction *= -1;
         }
 
@@ -238,7 +241,7 @@ canvas {
             }
 
             ctx.fillStyle = "#cc0000";
-            ctx.fillRect(150, 180, 200, 5);
+            ctx.fillRect(180, 180, 200, 5);
 
             if (goalieSprites[goalieState].complete)
                 ctx.drawImage(goalieSprites[goalieState], goalie.x, goalie.y, goalie.width, goalie.height);
