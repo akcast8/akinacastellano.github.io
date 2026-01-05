@@ -106,7 +106,7 @@ canvas {
         rinkOverlay.src = "assets/rink_overlay.PNG";
 
         const goalLine = {
-            x: 210,
+            x: 225,
             y: 180,
             width: 160,
             height: 5
@@ -251,7 +251,7 @@ canvas {
             }
 
             ctx.fillStyle = "#cc0000";
-            ctx.fillRect(210, 180, 160, 5);
+            ctx.fillRect(225, 180, 160, 5);
 
             if (goalieSprites[goalieState].complete)
                 ctx.drawImage(goalieSprites[goalieState], goalie.x, goalie.y, goalie.width, goalie.height);
