@@ -202,9 +202,9 @@ canvas {
             goalieState = "center";
         }
 
-        function rectCircleColliding(circle, rect) {
-            const distX = Math.abs(circle.x - rect.x - rect.width / 2) + 25;
-            const distY = Math.abs(circle.y - rect.y - rect.height / 2) + 25;
+        function rectCircleColliding(circle, rect, margin) {
+            const distX = Math.abs(circle.x - rect.x - rect.width / 2) + margin;
+            const distY = Math.abs(circle.y - rect.y - rect.height / 2) + margin;
             if (distX > (rect.width / 2 + circle.radius)) return false;
             if (distY > (rect.height / 2 + circle.radius)) return false;
             return true;
@@ -221,10 +221,10 @@ canvas {
 
             if (shooting) {
                 puck.y -= puck.speed;
-                if (rectCircleColliding(puck, goalie)) {
+                if (rectCircleColliding(puck, goalie, 25)) {
                     resetPuck();
                 }
-                if (rectCircleColliding(puck, goalLine)) {
+                if (rectCircleColliding(puck, goalLine, 0)) {
                     score++;
                     scoreEl.textContent = score;
                     goalie.speed += 0.3;
