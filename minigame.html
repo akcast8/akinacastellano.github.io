@@ -5,6 +5,23 @@
 <meta charset="UTF-8">
 <title>Hockey Shoot Out</title>
 <style>
+#homeBtn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: white;
+    color: black;
+    border: none;
+    padding: 8px 14px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+#homeBtn:hover {
+    background: #ddd;
+}
 body {
     background: #0b1e2d;
     display: flex;
@@ -46,9 +63,9 @@ canvas {
 </style>
 </head>
 <body>
-    <nav>
-        <a href="index.html">Back to Home</a>
-      </nav>
+    <button id="homeBtn" onclick="window.location.href='index.html'">
+        ← Home
+    </button>
     <div id="title">Hockey Shoot Out</div>
     <div id="info">Score: <span id="score">0</span></div>
     <canvas id="game" width="600" height="800"></canvas>
@@ -93,10 +110,10 @@ canvas {
         goalieSprites.right.src = "assets/goalie_right.PNG";
 
         const shooter = {
-            x: canvas.width / 2 - 100,
+            x: canvas.width / 2 - 50,
             y: canvas.height - 160,
-            width: 200,
-            height: 200
+            width: 100,
+            height: 100
         };
 
         const puck = {
@@ -109,8 +126,8 @@ canvas {
         const goalie = {
             x: canvas.width / 2 - 75,
             y: 150,
-            width: 200,
-            height: 200,
+            width: 100,
+            height: 100,
             speed: 3,
             direction: 1
         };
@@ -158,21 +175,17 @@ canvas {
         function resetPuck() {
             shooting = false;
             puck.speed = 0;
-            puck.y = shooter.y - 1;
+            puck.y = shooter.y - 5;
             shooterState = "idle";
             shooterTimer = 0;
             goalieState = "center";
         }
 
-        function rectCircleColliding(circle, rect, margin = 5) {
-            const effectiveRadius = circle.radius - margin;
-
-            const distX = Math.abs(circle.x - rect.x - rect.width / 2);
-            const distY = Math.abs(circle.y - rect.y - rect.height / 2);
-
-            if (distX > (rect.width / 2 + effectiveRadius)) return false;
-            if (distY > (rect.height / 2 + effectiveRadius)) return false;
-
+        function rectCircleColliding(circle, rect) {
+            const distX = Math.abs(circle.x - rect.x - rect.width / 2) + 50;
+            const distY = Math.abs(circle.y - rect.y - rect.height / 2) + 50;
+            if (distX > (rect.width / 2 + circle.radius)) return false;
+            if (distY > (rect.height / 2 + circle.radius)) return false;
             return true;
         }
 
