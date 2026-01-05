@@ -42,7 +42,7 @@ canvas {
 }
 #info {
     position: absolute;
-    top: 60px;
+    top: 80px;
     font-size: 18px;
     color: black;
     background: white;
@@ -51,7 +51,7 @@ canvas {
 }
 #title {
     position: absolute;
-    top: 20px;
+    top: 40px;
     font-size: 25px;
     color: black;
     font-weight: bold;
@@ -61,10 +61,10 @@ canvas {
 }
 @media (max-width: 600px) {
     #info {
-        top: 110px;
+        top: 150px;
     }
     #title {
-        top: 70px;
+        top: 110px;
     }
 }
 
@@ -121,7 +121,7 @@ canvas {
         goalieSprites.right.src = "assets/goalie_right.PNG";
 
         const shooter = {
-            x: canvas.width / 2 - 60,
+            x: canvas.width / 2 - 70,
             y: canvas.height - 160,
             width: 150,
             height: 150
@@ -226,7 +226,7 @@ canvas {
             }
 
             goalie.x += goalie.speed * goalie.direction;
-            if (goalie.x <= 100 || goalie.x + goalie.width >= canvas.width - 100)
+            if (goalie.x <= 70 || goalie.x + goalie.width >= canvas.width - 70)
                 goalie.direction *= -1;
         }
 
@@ -238,7 +238,7 @@ canvas {
             }
 
             ctx.fillStyle = "#cc0000";
-            ctx.fillRect(150, 180, 300, 10);
+            ctx.fillRect(150, 180, 200, 5);
 
             if (goalieSprites[goalieState].complete)
                 ctx.drawImage(goalieSprites[goalieState], goalie.x, goalie.y, goalie.width, goalie.height);
