@@ -133,7 +133,7 @@ canvas {
 
         const goalie = {
             x: canvas.width / 2 - 75,
-            y: 180,
+            y: 120,
             width: 150,
             height: 150,
             speed: 3,
@@ -183,7 +183,7 @@ canvas {
         function resetPuck() {
             shooting = false;
             puck.speed = 0;
-            puck.y = shooter.y - 5;
+            puck.y = shooter.y;
             shooterState = "idle";
             shooterTimer = 0;
             goalieState = "center";
