@@ -230,6 +230,9 @@ canvas {
                     goalie.speed += 0.3;
                     resetPuck();
                 }
+                if (puck.y < 0) {
+                    resetPuck();
+                }
             } else {
                 puck.x = shooter.x + shooter.width / 2;
                 puck.y = shooter.y - 5;
