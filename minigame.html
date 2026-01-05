@@ -99,6 +99,9 @@ canvas {
         let score = 0;
         let shooting = false;
 
+        const rinkOverlay = new Image();
+        rinkOverlay.src = "assets/rink_overlay.png";
+
         const shooterSprites = {
             idle: new Image(),
             swing: new Image(),
@@ -229,6 +232,10 @@ canvas {
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (rinkOverlay.complete) {
+                ctx.drawImage(rinkOverlay, 0, 0, canvas.width, canvas.height);
+            }
 
             ctx.fillStyle = "#cc0000";
             ctx.fillRect(150, 120, 300, 10);
