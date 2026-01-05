@@ -182,8 +182,8 @@ canvas {
         }
 
         function rectCircleColliding(circle, rect) {
-            const distX = Math.abs(circle.x - rect.x - rect.width / 2) + 50;
-            const distY = Math.abs(circle.y - rect.y - rect.height / 2) + 50;
+            const distX = Math.abs(circle.x - rect.x - rect.width / 2) + 10;
+            const distY = Math.abs(circle.y - rect.y - rect.height / 2) + 10;
             if (distX > (rect.width / 2 + circle.radius)) return false;
             if (distY > (rect.height / 2 + circle.radius)) return false;
             return true;
