@@ -121,7 +121,7 @@ canvas {
         goalieSprites.right.src = "assets/goalie_right.PNG";
 
         const shooter = {
-            x: canvas.width / 2 - 50,
+            x: canvas.width / 2 - 40,
             y: canvas.height - 160,
             width: 150,
             height: 150
@@ -238,7 +238,7 @@ canvas {
             }
 
             ctx.fillStyle = "#cc0000";
-            ctx.fillRect(150, 210, 300, 10);
+            ctx.fillRect(150, 195, 300, 10);
 
             if (goalieSprites[goalieState].complete)
                 ctx.drawImage(goalieSprites[goalieState], goalie.x, goalie.y, goalie.width, goalie.height);
