@@ -126,14 +126,14 @@ canvas {
 
         const puck = {
             x: canvas.width / 2,
-            y: shooter.y - 15,
+            y: shooter.y - 5,
             radius: 10,
             speed: 0
         };
 
         const goalie = {
             x: canvas.width / 2 - 75,
-            y: 150,
+            y: 180,
             width: 150,
             height: 150,
             speed: 3,
@@ -190,8 +190,8 @@ canvas {
         }
 
         function rectCircleColliding(circle, rect) {
-            const distX = Math.abs(circle.x - rect.x - rect.width / 2) + 15;
-            const distY = Math.abs(circle.y - rect.y - rect.height / 2) + 15;
+            const distX = Math.abs(circle.x - rect.x - rect.width / 2) + 25;
+            const distY = Math.abs(circle.y - rect.y - rect.height / 2) + 25;
             if (distX > (rect.width / 2 + circle.radius)) return false;
             if (distY > (rect.height / 2 + circle.radius)) return false;
             return true;
