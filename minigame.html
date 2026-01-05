@@ -105,6 +105,13 @@ canvas {
         const rinkOverlay = new Image();
         rinkOverlay.src = "assets/rink_overlay.PNG";
 
+        const goalLine = {
+            x: 200,
+            y: 180,
+            width: 160,
+            height: 5
+        };
+
         const shooterSprites = {
             idle: new Image(),
             swing: new Image(),
@@ -217,7 +224,7 @@ canvas {
                 if (rectCircleColliding(puck, goalie)) {
                     resetPuck();
                 }
-                if (puck.y < goalie.y) {
+                if (rectCircleColliding(puck, goalLine)) {
                     score++;
                     scoreEl.textContent = score;
                     goalie.speed += 0.3;
